@@ -1,0 +1,30 @@
+int sensor1 = 0;
+int sensor2 = 0;
+int incoming; 
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(11, OUTPUT);
+}
+
+void loop() {
+  sensor1 = analogRead(A0);
+  delay(1);
+  sensor2 = analogRead(A1);
+  
+  Serial.print(sensor1);
+  Serial.print(",");
+  Serial. println(sensor2);
+
+  if(Serial.available() > 0){ //if we have data
+    incoming = Serial.read();
+
+    if(incoming == 'H'){
+      digitalWrite(11, HIGH);
+    }
+
+    if(incoming == 'L'){
+      digitalWrite(11, LOW);
+    }
+  }  
+} 
